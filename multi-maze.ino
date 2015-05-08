@@ -1,35 +1,76 @@
 #include <MeggyJrSimple.h> 
 
-
+int x=0;          //player x coordinate
+int y=7;          //player y coordinate
+int portalx=0;    //portal x coordinate
+int portaly=0; //portal y coordinate
+int direction=180;
 
 void setup() {
   // put your setup code here, to run once:
   MeggyJrSimpleSetup();
-  
 
 }
 
 void loop() 
 {
-  drawDot(); 
-  drawPortal();
+  drawPortal1();
   Maze1();
-  DisplaySlate();  
+  drawDot();
+  UpdateDot();
+  DisplaySlate(); 
+  delay(1000); 
   ClearSlate();
+  CheckButtonsPress();
+    if (Button_Right)
+      direction = 90;    //check buttons
+                       //moves right
+    if (Button_Left)
+      direction = 270;
+      
+    if (Button_Down)   
+      direction = 180;    //moves down
+      
+    if (Button_Up) 
+      direction = 0;
+  UpdateDot();    //moves up
+      
+  
 }
 
 void drawDot()
 {
- DrawPx(0,7,Blue);
+ DrawPx(x,y,Blue);
 }
 
 void UpdateDot()
 {
+  if (direction == 90)
+   {
+     if (x < 7)
+       x+=1; 
+   }
+  if (direction == 270)
+   {      
+     if (x > 0)
+       x-=1;   
+   }             
+  if (direction == 180)
+   {
+     if (y > 0)
+       y-=1;
+   }
   
+  if (direction == 0)
+   {
+     if (y < 7)
+       y+=1;
+   }
+    
 }
 
 
-void drawPortal()
+void drawPortal1()
 {
   DrawPx(1,0,4);
 }
@@ -80,5 +121,11 @@ void Maze1()
 }
 
 
+  
+  
+  
+  
+  
+  
   
   
