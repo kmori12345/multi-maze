@@ -6,6 +6,8 @@ int portalx=0;    //portal x coordinate
 int portaly=0; //portal y coordinate
 int direction=180;
 int counter=0;
+int level=1;
+int start=0;
 
 
 void setup() {
@@ -16,10 +18,69 @@ void setup() {
 
 void loop() 
 {
-  if (counter>9999)
+  if(level==1)
   {
-    counter=0;
-  }
+  //int start==0;
+    if (Blue == (0,7))
+    {
+      delay(2000);
+    }
+    if (counter>9999)
+    {
+      counter=0;
+    }
+  else counter++;
+  drawPortal1();
+  Maze1();
+  drawDot();
+  if (counter %250 == 0)
+  {
+    UpdateDot();
+  }  
+  if (ReadPx(x,y) == Red)      //returns true if there's a match
+    {
+      x=0;
+      y=7;
+      
+      
+    }
+  if (ReadPx(x,y) == Green)      //returns true if there's a match
+    {
+       level++;
+       x=0;
+       y=7;
+    }
+
+  DisplaySlate(); 
+  ClearSlate();
+  CheckButtonsPress();
+    if (Button_Right)
+    {
+      direction = 90;
+    }    
+                      
+    if (Button_Left)
+    {
+      direction = 270;
+    }
+      
+    if (Button_Down)
+    {   
+      direction = 180;  
+    }
+      
+    if (Button_Up) 
+    {
+      direction = 0;
+    }
+   //moves up  
+}
+  if(level==2)
+  {
+    if (counter>9999)
+    {
+      counter=0;
+    }
   else counter++;
   drawPortal1();
   Maze2();
@@ -56,10 +117,11 @@ void loop()
     {
       direction = 0;
     }
-   //moves up
-      
-  
+   //moves up  
 }
+}
+
+
 
 void drawDot()
 {
@@ -97,10 +159,7 @@ void drawPortal1()
 {
   DrawPx(1,0,4);
 }
-void drawPortal2()
-{
-  DrawPx(7,0,4);
-}
+
 
 void Maze1()
 {
@@ -149,7 +208,7 @@ void Maze1()
 
 void Maze2()
 {
- DrawPx(0,0,1);
+  DrawPx(0,0,1);
   DrawPx(0,1,1);
   DrawPx(0,2,1);
   DrawPx(3,6,1);
@@ -188,10 +247,6 @@ void Maze2()
   DrawPx(7,6,1);
   DrawPx(7,7,1);
 }
-
-
-  
-  
   
   
   
